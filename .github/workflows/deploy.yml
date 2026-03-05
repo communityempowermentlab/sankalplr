@@ -57,6 +57,6 @@ jobs:
             cd server
             npm install --production
             
-            # 4. Restart the node server using PM2 (Forcing Port 5020)
-            pm2 restart sankalplr-api || pm2 start src/server.js --name "sankalplr-api" --env PORT=5020
+            # 4. Restart the node server using PM2 (Forcing Port 5002)
+            pm2 restart sankalplr-api || pm2 start src/server.js --name "sankalplr-api" --env PORT=5002
             pm2 save
