@@ -46,7 +46,7 @@ jobs:
           script: |
             # 1. Navigate to the App directory on AWS
             # IMPORTANT: This assumes the folder path. Change if necessary!
-            cd /var/www/sankalplr
+            cd /var/www/html/sankalplr
             
             # 2. Pull the latest code
             git fetch --all
