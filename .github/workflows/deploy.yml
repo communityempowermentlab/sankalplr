@@ -1,4 +1,4 @@
-name: Deploy SankalpLR to Production
+name: CI/CD Pipeline - AWS (SankalpLR)
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v3
 
       # ==========================================
-      # 1. FRONTEND BUILD
+      # 1. FRONTEND BUILD (VITE)
       # ==========================================
       - name: ⚙️ Setup Node.js (Frontend)
         uses: actions/setup-node@v3
@@ -25,34 +25,38 @@ jobs:
         working-directory: ./client
         run: npm install
 
-      - name: 🏗️ Build Frontend (Vite)
+      - name: 🏗️ Build Frontend
         working-directory: ./client
+        # Inject Production AWS Environment Variables during the Vite build step!
+        env:
+          VITE_API_BASE_URL: https://sankalplrapi.celworld.org/api
+          VITE_SERVER_URL: https://sankalplr.celworld.org/
         run: npm run build
 
       # ==========================================
-      # 2. SERVER DEPLOYMENT (SSH via PM2)
+      # 2. SERVER DEPLOYMENT (AWS - SSH)
       # ==========================================
-      - name: 🚀 Deploy to Production Server
+      - name: 🚀 Deploy to AWS Production Server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          port: ${{ secrets.SERVER_PORT }} # usually 22
+          port: ${{ secrets.SERVER_PORT }}
           script: |
-            # 1. Navigate to the project root on the live server
-            # REPLACE THIS PATH WITH YOUR ACTUAL SERVER FOLDER PATH!
+            # 1. Navigate to the App directory on AWS
+            # IMPORTANT: This assumes the folder path. Change if necessary!
             cd /var/www/sankalplr
             
-            # 2. Pull the latest code from GitHub
+            # 2. Pull the latest code
             git fetch --all
             git reset --hard origin/main
             git pull origin main
             
-            # 3. Setup Backend
+            # 3. Secure Backend Environment
             cd server
             npm install --production
             
-            # 4. Restart the node server using PM2
-            # If PM2 is not running it, it will start it.
-            pm2 restart sankalplr-api || pm2 start src/server.js --name "sankalplr-api"
+            # 4. Restart the node server using PM2 (Forcing Port 5020)
+            pm2 restart sankalplr-api || pm2 start src/server.js --name "sankalplr-api" --env PORT=5020
+            pm2 save
