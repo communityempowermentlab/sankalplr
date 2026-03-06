@@ -231,6 +231,15 @@ const AddPatient = () => {
         if (step === 1) { // Registration & Admission (Q1-Q23)
             reqFields.push('q1', 'q2', 'q3', 'q4', 'q5', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13', 'q14', 'q15', 'q16', 'q19', 'q20', 'q21', 'q22', 'q23');
             if (formData.q11 === 'Preterm') reqFields.push('q17', 'q18');
+
+            if (formData.q8) {
+                const now = new Date();
+                const [selHour, selMin] = formData.q8.split(':').map(Number);
+                if (selHour > now.getHours() || (selHour === now.getHours() && selMin > now.getMinutes())) {
+                    alert("Time of Admission must not be a future time.");
+                    newErrors['q8'] = true;
+                }
+            }
         }
         else if (step === 2) { // Delivery & Complications (Q24-Q41)
             reqFields.push('q24');
