@@ -230,7 +230,10 @@ const AddPatient = () => {
 
         if (step === 1) { // Registration & Admission (Q1-Q23)
             reqFields.push('q1', 'q2', 'q3', 'q4', 'q5', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13', 'q14', 'q15', 'q16', 'q19', 'q20', 'q21', 'q22', 'q23');
-            if (formData.q11 === 'Preterm') reqFields.push('q17', 'q18');
+            if (formData.q11 === 'Preterm') {
+                reqFields.push('q17');
+                if (formData.q17 === 'Yes') reqFields.push('q18');
+            }
 
             if (formData.q8) {
                 const now = new Date();
@@ -695,11 +698,13 @@ const AddPatient = () => {
                                                     {renderPilGroup('q17', [{ value: 'Yes', label: 'Yes', variant: 'ok' }, { value: 'No', label: 'No', variant: 'danger' }, { value: 'NA', label: 'N/A' }])}
                                                     {errors.q17 && <div className="ap-req">Required</div>}
                                                 </div>
-                                                <div className="ap-field">
-                                                    <label className="ap-field-label"><span className="ap-q-badge">Q18</span> Number of Doses <span className="ap-req">*</span></label>
-                                                    {renderPilGroup('q18', [{ value: '1', label: '1' }, { value: '2', label: '2' }, { value: '3', label: '3' }, { value: 'NA', label: 'N/A' }])}
-                                                    {errors.q18 && <div className="ap-req">Required</div>}
-                                                </div>
+                                                {formData.q17 === 'Yes' && (
+                                                    <div className="ap-field">
+                                                        <label className="ap-field-label"><span className="ap-q-badge">Q18</span> Number of Doses <span className="ap-req">*</span></label>
+                                                        {renderPilGroup('q18', [{ value: '1', label: '1' }, { value: '2', label: '2' }, { value: '3', label: '3' }, { value: 'NA', label: 'N/A' }])}
+                                                        {errors.q18 && <div className="ap-req">Required</div>}
+                                                    </div>
+                                                )}
                                             </div>
                                         </>
                                     )}
