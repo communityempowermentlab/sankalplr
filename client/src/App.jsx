@@ -27,7 +27,7 @@ const PrivateRoute = ({ children }) => {
 
 function App() {
   return (
-    <Router basename="/sankalplr">
+    <Router>
       <AuthProvider>
         <Routes>
           <Route path="/login" element={<Login />} />
