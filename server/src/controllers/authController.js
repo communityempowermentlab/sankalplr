@@ -41,10 +41,11 @@ const loginUser = async (req, res, next) => {
             [username, ipAddress]
         );
 
-        if (recentFails[0].fail_count >= 5) {
-            await logActivity(null, username, 'Unknown', 'Login', 'Failed', ipAddress, deviceInfo, null);
-            return res.status(429).json({ success: false, message: 'Too many failed login attempts. Account locked for 15 minutes. Please try again later.' });
-        }
+        // TEMPORARILY DISABLED 
+        // if (recentFails[0].fail_count >= 5) {
+        //     await logActivity(null, username, 'Unknown', 'Login', 'Failed', ipAddress, deviceInfo, null);
+        //     return res.status(429).json({ success: false, message: 'Too many failed login attempts. Account locked for 15 minutes. Please try again later.' });
+        // }
 
         const [rows] = await pool.query('SELECT * FROM Users WHERE username = ?', [username]);
 
