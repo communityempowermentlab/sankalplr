@@ -672,7 +672,7 @@ const AddPatient = () => {
                                             {errors.q15 && <div className="ap-req">Required</div>}
                                         </div>
                                         <div className="ap-field">
-                                            <label className="ap-field-label"><span className="ap-q-badge">Q16</span> Partograph Filled <span className="ap-req">*</span></label>
+                                            <label className="ap-field-label"><span className="ap-q-badge">Q16</span> Partograph filled real time <span className="ap-req">*</span></label>
                                             {renderPilGroup('q16', [{ value: 'Yes', label: 'Yes', variant: 'ok' }, { value: 'No', label: 'No', variant: 'danger' }, { value: 'NA', label: 'N/A' }])}
                                             {errors.q16 && <div className="ap-req">Required</div>}
                                         </div>
