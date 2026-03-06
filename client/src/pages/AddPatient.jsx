@@ -236,8 +236,7 @@ const AddPatient = () => {
                 const now = new Date();
                 const [selHour, selMin] = formData.q8.split(':').map(Number);
                 if (selHour > now.getHours() || (selHour === now.getHours() && selMin > now.getMinutes())) {
-                    alert("Time of Admission must not be a future time.");
-                    newErrors['q8'] = true;
+                    newErrors['q8'] = 'future_time';
                 }
             }
         }
@@ -626,6 +625,7 @@ const AddPatient = () => {
                                         <div className="ap-field">
                                             <label className="ap-field-label"><span className="ap-q-badge">Q8</span> Time of Admission <span className="ap-req">*</span></label>
                                             <input type="time" name="q8" value={formData.q8} onChange={handleChange} max={`${String(new Date().getHours()).padStart(2, '0')}:${String(new Date().getMinutes()).padStart(2, '0')}`} className={errors.q8 ? 'err' : ''} />
+                                            {errors.q8 === 'future_time' ? <div className="ap-req">Cannot be a future time</div> : (errors.q8 && <div className="ap-req">Required</div>)}
                                         </div>
                                     </div>
                                 </div>
