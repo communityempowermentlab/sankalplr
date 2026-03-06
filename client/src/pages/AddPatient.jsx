@@ -616,7 +616,7 @@ const AddPatient = () => {
                                         </div>
                                         <div className="ap-field">
                                             <label className="ap-field-label"><span className="ap-q-badge">Q8</span> Time of Admission <span className="ap-req">*</span></label>
-                                            <input type="time" name="q8" value={formData.q8} onChange={handleChange} className={errors.q8 ? 'err' : ''} />
+                                            <input type="time" name="q8" value={formData.q8} onChange={handleChange} max={`${String(new Date().getHours()).padStart(2, '0')}:${String(new Date().getMinutes()).padStart(2, '0')}`} className={errors.q8 ? 'err' : ''} />
                                         </div>
                                     </div>
                                 </div>
