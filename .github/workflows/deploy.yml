@@ -39,7 +39,7 @@ jobs:
       - name: 🚀 Deploy to AWS Production Server
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: 3.14.25.101
+          host: 65.0.88.85
           username: ubuntu
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
