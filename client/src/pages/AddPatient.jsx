@@ -782,23 +782,25 @@ const AddPatient = () => {
                                         )}
                                     </div>
                                 </div>
-                                <div className="ap-card">
-                                    <div className="ap-card-title">Complication Management</div>
-                                    <div className="ap-grid-2">
-                                        <div className="ap-field">
-                                            <label className="ap-field-label"><span className="ap-q-badge">Q27</span> Complication Managed <span className="ap-req">*</span></label>
-                                            {renderPilGroup('q27', [{ value: 'Yes', label: 'Yes', variant: 'ok' }, { value: 'No', label: 'No', variant: 'danger' }, { value: 'NA', label: 'N/A' }])}
-                                            {errors.q27 && <div className="ap-req">Required</div>}
-                                        </div>
-                                        {formData.q27 === 'Yes' && (
+                                {formData.q24 === 'Yes' && (
+                                    <div className="ap-card">
+                                        <div className="ap-card-title">Complication Management</div>
+                                        <div className="ap-grid-2">
                                             <div className="ap-field">
-                                                <label className="ap-field-label"><span className="ap-q-badge">Q28</span> Senior Support Sought <span className="ap-req">*</span></label>
-                                                {renderPilGroup('q28', [{ value: 'Yes', label: 'Yes', variant: 'ok' }, { value: 'No', label: 'No' }])}
-                                                {errors.q28 && <div className="ap-req">Required</div>}
+                                                <label className="ap-field-label"><span className="ap-q-badge">Q27</span> Complication Managed <span className="ap-req">*</span></label>
+                                                {renderPilGroup('q27', [{ value: 'Yes', label: 'Yes', variant: 'ok' }, { value: 'No', label: 'No', variant: 'danger' }, { value: 'NA', label: 'N/A' }])}
+                                                {errors.q27 && <div className="ap-req">Required</div>}
                                             </div>
-                                        )}
+                                            {formData.q27 === 'Yes' && (
+                                                <div className="ap-field">
+                                                    <label className="ap-field-label"><span className="ap-q-badge">Q28</span> Senior Support Sought <span className="ap-req">*</span></label>
+                                                    {renderPilGroup('q28', [{ value: 'Yes', label: 'Yes', variant: 'ok' }, { value: 'No', label: 'No' }])}
+                                                    {errors.q28 && <div className="ap-req">Required</div>}
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
+                                )}
                                 {formData.q24 === 'Yes' && (
                                     <div className="ap-card">
                                         <div className="ap-card-title">Referral Details</div>
