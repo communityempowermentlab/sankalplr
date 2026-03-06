@@ -370,8 +370,8 @@ const AddPatient = () => {
 
                 const isEdit = !!formData.db_id;
                 const url = isEdit
-                    ? `http://localhost:5000/api/labour/update-patient/${formData.db_id}`
-                    : 'http://localhost:5000/api/labour/add-patient';
+                    ? `${import.meta.env.VITE_API_BASE_URL}/labour/update-patient/${formData.db_id}`
+                    : `${import.meta.env.VITE_API_BASE_URL}/labour/add-patient`;
                 const method = isEdit ? 'PUT' : 'POST';
 
                 const res = await fetch(url, {

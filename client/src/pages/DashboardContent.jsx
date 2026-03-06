@@ -18,7 +18,7 @@ const DashboardContent = ({ dateStr }) => {
         const fetchStats = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const res = await fetch('http://localhost:5000/api/dashboard/stats', {
+                const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/dashboard/stats`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (res.ok) {
@@ -47,7 +47,7 @@ const DashboardContent = ({ dateStr }) => {
         const fetchPatients = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const rs = await fetch('http://localhost:5000/api/labour/list', {
+                const rs = await fetch(`${import.meta.env.VITE_API_BASE_URL}/labour/list`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (rs.ok) {
@@ -64,7 +64,7 @@ const DashboardContent = ({ dateStr }) => {
             try {
                 // Must attach token for system logs route
                 const token = localStorage.getItem('token');
-                const rs = await fetch('http://localhost:5000/api/system-activity?limit=20', {
+                const rs = await fetch(`${import.meta.env.VITE_API_BASE_URL}/system-activity?limit=20`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (rs.ok) {

@@ -59,7 +59,7 @@ const ManageUsers = () => {
         setIsActivityModalOpen(true);
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/api/users/${usr.id}/activity`, {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/users/${usr.id}/activity`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await response.json();
@@ -87,7 +87,7 @@ const ManageUsers = () => {
     const loadUsers = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await fetch('http://localhost:5000/api/users', {
+            const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/users`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await res.json();
@@ -204,7 +204,7 @@ const ManageUsers = () => {
         setActionMsg('Saving...');
         try {
             const token = localStorage.getItem('token');
-            const url = editingUser ? `http://localhost:5000/api/users/${editingUser.id}` : 'http://localhost:5000/api/users';
+            const url = editingUser ? `${import.meta.env.VITE_API_BASE_URL}/users/${editingUser.id}` : `${import.meta.env.VITE_API_BASE_URL}/users`;
             const method = editingUser ? 'PUT' : 'POST';
 
             // Filter out empty password on edit
