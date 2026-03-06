@@ -611,8 +611,8 @@ const AddPatient = () => {
                                     <div className="ap-card-title">Admission Information</div>
                                     <div className="ap-grid-2">
                                         <div className="ap-field">
-                                            <label className="ap-field-label"><span className="ap-q-badge">Q7</span> Date of Admission <span className="ap-req">*</span></label>
-                                            <input type="date" name="q7" value={formData.q7} onChange={handleChange} max={new Date().toISOString().split('T')[0]} className={errors.q7 ? 'err' : ''} />
+                                            <label className="ap-field-label"><span className="ap-q-badge">Q7</span> Date of Admission<span className="ap-req">*</span></label>
+                                            <input type="date" name="q7" value={formData.q7} onChange={handleChange} max={new Date().toISOString().split('T')[0]} readOnly className={errors.q7 ? 'err read-only-field' : 'read-only-field'} />
                                         </div>
                                         <div className="ap-field">
                                             <label className="ap-field-label"><span className="ap-q-badge">Q8</span> Time of Admission <span className="ap-req">*</span></label>
